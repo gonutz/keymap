@@ -119,7 +119,7 @@
 #define BGT KC_BRIGHTNESS_UP
 #define DRK KC_BRIGHTNESS_DOWN
 #define NTB C(DE_T)
-#define CTB C(DE_W)
+#define CTB C(KC_F4)
 #define REO RCS(DE_T)
 #define QTN DE_QUES
 #define UML TO(_UMLAUTS)
@@ -159,12 +159,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ___ , _Q_ , _W_ , _F_ , _P_ , ___ , ___ , _L_ , _U_ , _Y_ , _V_ , ___ ,
     SYM , _A_ , _R_ , _S_ , _T_ , _G_ , _M_ , _N_ , _E_ , _I_ , _O_ , G_E ,
     ___ , _Z_ , _X_ , _C_ , _D_ , ___ , ___ , _H_ , _K_ , _B_ , _J_ , ___ ,
-    ___ , ___ , ___ , NAV , CBK ,    BAS    , CSP , NUM , ___ , ___ , QRZ
+    ___ , ___ , ___ , NAV , CBK ,    SFT    , CSP , NUM , ___ , ___ , QRZ
 ),
 [_SYMBOLS] = LAYOUT_planck_mit(
-    ___ , TLD , AT_ , HSH , EQL , ___ , ___ , LBR , RBR , QTN , MNS , ___ ,
-    SYM , DOL , PCN , AMP , UML , BSL , BNG , LPA , RPA , LBC , RBC , ENT ,
-    ___ , BAR , LES , MOR , UND , ___ , ___ , SQT , DQT , COM , DOT , ___ ,
+    ___ , TLD , AT_ , HSH , EQL , ___ , ___ , SQT , DQT , QTN , MNS , ___ 
+    ___ , DOL , PCN , AMP , UML , BSL , BNG , LPA , RPA , COM , DOT , ENT ,
+    ___ , BAR , LES , MOR , UND , ___ , ___ , LBR , RBR , LBC , RBC , ___ ,
     ___ , ___ , ___ , NAV , CBK ,    BAS    , CSP , NUM , ___ , ___ , QRZ
 ),
 [_NUM] = LAYOUT_planck_mit(
