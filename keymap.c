@@ -1,148 +1,145 @@
 #include QMK_KEYBOARD_H
 #include "keymap_german.h"
 
-#define ___ XXXXXXX
-#define _A_ DE_A
-#define _B_ DE_B
-#define _C_ DE_C
-#define _D_ DE_D
-#define _E_ DE_E
-#define _F_ DE_F
-#define _G_ DE_G
-#define _H_ DE_H
-#define _I_ DE_I
-#define _J_ DE_J
-#define _K_ DE_K
-#define _L_ DE_L
-#define _M_ DE_M
-#define _N_ DE_N
-#define _O_ DE_O
-#define _P_ DE_P
-#define _Q_ DE_Q
-#define _R_ DE_R
-#define _S_ DE_S
-#define _T_ DE_T
-#define _U_ DE_U
-#define _V_ DE_V
-#define _W_ DE_W
-#define _X_ DE_X
-#define _Y_ DE_Y
-#define _Z_ DE_Z
-#define NAV TO(_NAV)
-#define CBK LCTL_T(KC_BACKSPACE)
-#define S1T OSM(MOD_LSFT)
-#define G_E LGUI_T(KC_ENTER)
-#define SYM TO(_SYMBOLS)
-#define CSP LCTL_T(KC_SPACE)
-#define SPC KC_SPACE
-#define NUM TO(_NUM)
-#define TLD DE_TILD
-#define AT_ DE_AT
-#define HSH DE_HASH
-#define CFX DE_CIRC
-#define LBC DE_LCBR
-#define RBC DE_RCBR
-#define PLS LSFT_T(DE_PLUS)
-#define MNS DE_MINS
-#define BNG DE_EXLM
-#define DOL DE_DLR
-#define PCN DE_PERC
-#define AMP DE_AMPR
-#define MUL DE_ASTR
-#define BSL DE_BSLS
-#define SLH DE_SLSH
-#define LPA DE_LPRN
-#define RPA DE_RPRN
-#define LBR DE_LBRC
-#define RBR DE_RBRC
-#define EQL DE_EQL
-#define BAR DE_PIPE
-#define LES DE_LABK
-#define MOR DE_RABK
-#define UND DE_UNDS
-#define SQT DE_QUOT
-#define DQT DE_DQUO
-#define COM DE_COMM
-#define DOT DE_DOT
-#define TAB KC_TAB
-#define SEM DE_SCLN
-#define COL DE_COLN
-#define BAS TO(_BASE)
-#define F_1 KC_F1
-#define F_2 KC_F2
-#define F_3 KC_F3
-#define F_4 KC_F4
-#define F_5 KC_F5
-#define GF6 LGUI_T(KC_F6)
-#define F_7 KC_F7
-#define F_8 KC_F8
-#define F_9 KC_F9
-#define F10 KC_F10
-#define F11 KC_F11
-#define F12 KC_F12
-#define CTL KC_LCTL
-#define _1_ DE_1
-#define _2_ DE_2
-#define _3_ DE_3
-#define _4_ DE_4
-#define _5_ DE_5
-#define _6_ DE_6
-#define _7_ DE_7
-#define _8_ DE_8
-#define _9_ DE_9
-#define _0_ DE_0
-#define DEL KC_DELETE
-#define BOT QK_BOOT
-#define PUP KC_PAGE_UP
-#define PDN KC_PAGE_DOWN
-#define LFT KC_LEFT
-#define RGT KC_RIGHT
-#define UP_ KC_UP
-#define DWN KC_DOWN
-#define ESC KC_ESC
-#define SFT KC_LSFT
-#define ALT KC_LALT
-#define GUI KC_LEFT_GUI
-#define BT2 KC_MS_BTN2
-#define HOM KC_HOME
-#define END KC_END
-#define ENT KC_ENTER
-#define BAK KC_BACKSPACE
-#define CUT C(DE_X)
-#define CPY C(DE_C)
-#define PST C(DE_V)
-#define WND LCA(KC_TAB)
-#define QIT A(KC_F4)
-#define C_0 LCTL_T(DE_0)
-#define TBR C(KC_TAB)
-#define TBL RCS(KC_TAB)
-#define BGT KC_BRIGHTNESS_UP
-#define DRK KC_BRIGHTNESS_DOWN
-#define NTB C(DE_T)
-#define CTB C(KC_F4)
-#define REO RCS(DE_T)
-#define QTN DE_QUES
-#define UML TO(_UMLAUTS)
-#define AE_ DE_ADIA
-#define OE_ DE_ODIA
-#define UE_ DE_UDIA
-#define SS_ DE_SS
-#define PRT KC_PRINT_SCREEN
-#define VUP KC_AUDIO_VOL_UP
-#define VDN KC_AUDIO_VOL_DOWN
-#define MUT KC_AUDIO_MUTE
-#define PLY KC_MEDIA_PLAY_PAUSE
-#define BTK DE_GRV
-#define QRZ TO(_QWERTZ)
-#define PVT RCS(DE_N)
+#define _____ XXXXXXX
+#define __A__ DE_A
+#define __B__ DE_B
+#define __C__ DE_C
+#define __D__ DE_D
+#define __E__ DE_E
+#define __F__ DE_F
+#define __G__ DE_G
+#define __H__ DE_H
+#define __I__ DE_I
+#define __J__ DE_J
+#define __K__ DE_K
+#define __L__ DE_L
+#define __M__ DE_M
+#define __N__ DE_N
+#define __O__ DE_O
+#define __P__ DE_P
+#define __Q__ DE_Q
+#define __R__ DE_R
+#define __S__ DE_S
+#define __T__ DE_T
+#define __U__ DE_U
+#define __V__ DE_V
+#define __W__ DE_W
+#define __X__ DE_X
+#define __Y__ DE_Y
+#define __Z__ DE_Z
+#define ToNav TO(_NAV)
+#define C_Bck LCTL_T(KC_BACKSPACE)
+#define Shft1 OSM(MOD_LSFT)
+#define Gui_E LGUI_T(KC_ENTER)
+#define MoSym MO(_SYMBOLS)
+#define C_Spc LCTL_T(KC_SPACE)
+#define Space KC_SPACE
+#define ToNum TO(_NUM)
+#define Tilde DE_TILD
+#define _At__ DE_AT
+#define Hash_ DE_HASH
+#define Cmflx DE_CIRC
+#define LBrce DE_LCBR
+#define RBrce DE_RCBR
+#define Plus_ LSFT_T(DE_PLUS)
+#define Minus DE_MINS
+#define Bang_ DE_EXLM
+#define Dolar DE_DLR
+#define Perct DE_PERC
+#define Ampsn DE_AMPR
+#define Mult_ DE_ASTR
+#define Bkslh DE_BSLS
+#define Slash DE_SLSH
+#define LParn DE_LPRN
+#define RParn DE_RPRN
+#define LBrck DE_LBRC
+#define RBrck DE_RBRC
+#define Equal DE_EQL
+#define _Bar_ DE_PIPE
+#define Less_ DE_LABK
+#define More_ DE_RABK
+#define Under DE_UNDS
+#define Quote DE_QUOT
+#define DblQu DE_DQUO
+#define Comma DE_COMM
+#define _Dot_ DE_DOT
+#define _Tab_ KC_TAB
+#define ToBas TO(_BASE)
+#define _F_1_ KC_F1
+#define _F_2_ KC_F2
+#define _F_3_ KC_F3
+#define _F_4_ KC_F4
+#define _F_5_ KC_F5
+#define GuiF6 LGUI_T(KC_F6)
+#define _F_7_ KC_F7
+#define _F_8_ KC_F8
+#define _F_9_ KC_F9
+#define _F10_ KC_F10
+#define _F11_ KC_F11
+#define _F12_ KC_F12
+#define Ctrl_ KC_LCTL
+#define __1__ DE_1
+#define __2__ DE_2
+#define __3__ DE_3
+#define __4__ DE_4
+#define __5__ DE_5
+#define __6__ DE_6
+#define __7__ DE_7
+#define __8__ DE_8
+#define __9__ DE_9
+#define __0__ DE_0
+#define _Del_ KC_DELETE
+#define Boot_ QK_BOOT
+#define PagUp KC_PAGE_UP
+#define PgDwn KC_PAGE_DOWN
+#define Left_ KC_LEFT
+#define Right KC_RIGHT
+#define _Up__ KC_UP
+#define Down_ KC_DOWN
+#define _Esc_ KC_ESC
+#define Shift KC_LSFT
+#define _Alt_ KC_LALT
+#define _Gui_ KC_LEFT_GUI
+#define Home_ KC_HOME
+#define _End_ KC_END
+#define Enter KC_ENTER
+#define _BAK_ KC_BACKSPACE
+#define _Cut_ C(DE_X)
+#define Copy_ C(DE_C)
+#define Paste C(DE_V)
+#define Wndws LCA(KC_TAB)
+#define Quit_ A(KC_F4)
+#define Ctl_0 LCTL_T(DE_0)
+#define R_Tab C(KC_TAB)
+#define L_Tab RCS(KC_TAB)
+#define Brght KC_BRIGHTNESS_UP
+#define Darkr KC_BRIGHTNESS_DOWN
+#define NwTab C(DE_T)
+#define ClTab C(KC_F4)
+#define ReOpn RCS(DE_T)
+#define Qstin DE_QUES
+#define ToUml TO(_UMLAUTS)
+#define _Ae__ DE_ADIA
+#define _Oe__ DE_ODIA
+#define _Ue__ DE_UDIA
+#define _Ss__ DE_SS
+#define Print KC_PRINT_SCREEN
+#define VolUp KC_AUDIO_VOL_UP
+#define VolDn KC_AUDIO_VOL_DOWN
+#define Mute_ KC_AUDIO_MUTE
+#define Play_ KC_MEDIA_PLAY_PAUSE
+#define BkTik DE_GRV
+#define ToQrz TO(_QWERTZ)
+#define Prvat RCS(DE_N)
 
 enum custom_keycodes {
-	GG_ = SAFE_RANGE,
+	SayGG = SAFE_RANGE,
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-    case GG_:
+    case SayGG:
         if (record->event.pressed) {
             SEND_STRING("\ngg\n");
         }
@@ -156,40 +153,40 @@ enum layers { _BASE, _SYMBOLS, _NUM, _NAV, _UMLAUTS, _QWERTZ };
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [_BASE] = LAYOUT_planck_mit(
-    ___ , _Q_ , _W_ , _F_ , _P_ , ___ , ___ , _L_ , _U_ , _Y_ , _V_ , ___ ,
-    SYM , _A_ , _R_ , _S_ , _T_ , _G_ , _M_ , _N_ , _E_ , _I_ , _O_ , G_E ,
-    ___ , _Z_ , _X_ , _C_ , _D_ , ___ , ___ , _H_ , _K_ , _B_ , _J_ , ___ ,
-    ___ , ___ , ___ , NAV , CBK ,    SFT    , CSP , NUM , ___ , ___ , QRZ
+    _____ , __Q__ , __W__ , __F__ , __P__ , _____ , _____ , __L__ , __U__ , __Y__ , __V__ , _____ ,
+    MoSym , __A__ , __R__ , __S__ , __T__ , __G__ , __M__ , __N__ , __E__ , __I__ , __O__ , Gui_E ,
+    _____ , __Z__ , __X__ , __C__ , __D__ , _____ , _____ , __H__ , __K__ , __B__ , __J__ , _____ ,
+    _____ , _____ , _____ , ToNav , C_Bck ,     Shift     , C_Spc , ToNum , _____ , _____ , ToQrz
 ),
 [_SYMBOLS] = LAYOUT_planck_mit(
-    ___ , TLD , AT_ , HSH , EQL , ___ , ___ , SQT , DQT , QTN , MNS , ___ 
-    ___ , DOL , PCN , AMP , UML , BSL , BNG , LPA , RPA , COM , DOT , ENT ,
-    ___ , BAR , LES , MOR , UND , ___ , ___ , LBR , RBR , LBC , RBC , ___ ,
-    ___ , ___ , ___ , NAV , CBK ,    BAS    , CSP , NUM , ___ , ___ , QRZ
+    _____ , Tilde , _At__ , Hash_ , Equal , _____ , _____ , Quote , DblQu , Qstin , Minus , _____ ,
+    _____ , Dolar , Perct , Ampsn , ToUml , Bkslh , Bang_ , LParn , RParn , Comma , _Dot_ , Enter ,
+    _____ , _Bar_ , Less_ , More_ , Under , _____ , _____ , LBrck , RBrck , LBrce , RBrce , _____ ,
+    _____ , _____ , _____ , ToNav , C_Bck ,     ToBas     , C_Spc , ToNum , _____ , _____ , ToQrz
 ),
 [_NUM] = LAYOUT_planck_mit(
-    ___ , F12 , F_7 , F_8 , F_9 , ___ , ___ , _7_ , _8_ , _9_ , MNS , ___ ,
-    SYM , F11 , F_4 , F_5 , GF6 , MUL , SLH , _4_ , _5_ , _6_ , PLS , ENT ,
-    ___ , F10 , F_1 , F_2 , F_3 , ___ , ___ , _1_ , _2_ , _3_ , DOT , ___ ,
-    ___ , ___ , ___ , NAV , CBK ,    BAS    , CSP , C_0 , ___ , ___ , QRZ
+    _____ , _F12_ , _F_7_ , _F_8_ , _F_9_ , _____ , _____ , __7__ , __8__ , __9__ , Minus , _____ ,
+    MoSym , _F11_ , _F_4_ , _F_5_ , GuiF6 , Mult_ , Slash , __4__ , __5__ , __6__ , Plus_ , Enter ,
+    _____ , _F10_ , _F_1_ , _F_2_ , _F_3_ , _____ , _____ , __1__ , __2__ , __3__ , _Dot_ , _____ ,
+    _____ , _____ , _____ , ToNav , C_Bck ,     ToBas     , C_Spc , Ctl_0 , _____ , _____ , ToQrz
 ),
 [_NAV] = LAYOUT_planck_mit(
-    BOT , REO , WND , ESC , PVT , ___ , ___ , PUP , UP_ , PDN , QIT , ___ ,
-    SYM , CTL , SFT , ALT , TAB , GUI , HOM , LFT , DWN , RGT , END , ENT ,
-    ___ , DEL , CUT , CPY , PST , ___ , ___ , TBL , TBR , NTB , CTB , ___ ,
-    ___ , ___ , ___ , NAV , CBK ,    BAS    , CSP , NUM , ___ , ___ , QRZ
+    Boot_ , ReOpn , Wndws , _Esc_ , Prvat , _____ , _____ , PagUp , _Up__ , PgDwn , Quit_ , _____ ,
+    MoSym , Ctrl_ , Shift , _Alt_ , _Tab_ , _Gui_ , Home_ , Left_ , Down_ , Right , _End_ , Enter ,
+    _____ , _Del_ , _Cut_ , Copy_ , Paste , _____ , _____ , L_Tab , R_Tab , NwTab , ClTab , _____ ,
+    _____ , _____ , _____ , ToNav , C_Bck ,     ToBas     , C_Spc , ToNum , _____ , _____ , ToQrz
 ),
 [_UMLAUTS] = LAYOUT_planck_mit(
-    ___ , CFX , BTK , ALT , PRT , ___ , ___ , PLY , UE_ , ___ , ___ , ___ ,
-    SYM , AE_ , ___ , SS_ , UML , ___ , ___ , VDN , VUP , MUT , OE_ , ENT ,
-    ___ , ___ , ___ , ___ , ___ , ___ , ___ , DRK , BGT , ___ , ___ , ___ ,
-    ___ , ___ , ___ , NAV , CBK ,    BAS    , CSP , NUM , ___ , ___ , QRZ
+    _____ , Cmflx , BkTik , _Alt_ , Print , _____ , _____ , Play_ , _Ue__ , _____ , _____ , _____ ,
+    MoSym , _Ae__ , _____ , _Ss__ , ToUml , _____ , _____ , VolDn , VolUp , Mute_ , _Oe__ , Enter ,
+    _____ , _____ , _____ , _____ , _____ , _____ , _____ , Darkr , Brght , _____ , _____ , _____ ,
+    _____ , _____ , _____ , ToNav , C_Bck ,     ToBas     , C_Spc , ToNum , _____ , _____ , ToQrz
 ),
 [_QWERTZ] = LAYOUT_planck_mit(
-    ___ , GG_ , _Q_ , _W_ , _E_ , ___ , ___ , ___ , ___ , ___ , ___ , ___ ,
-    ESC , SFT , _A_ , _S_ , _D_ , ENT , ___ , ___ , ___ , ___ , ___ , ___ ,
-    ___ , ALT , _C_ , _C_ , _C_ , ___ , ___ , ___ , ___ , ___ , ___ , ___ ,
-    ___ , ___ , ___ , _Y_ , SPC ,    SPC    , ___ , ___ , ___ , ___ , BAS
+    _____ , SayGG , __Q__ , __W__ , __E__ , _____ , _____ , _____ , _____ , _____ , _____ , _____ ,
+    _Esc_ , Shift , __A__ , __S__ , __D__ , Enter , _____ , _____ , _____ , _____ , _____ , _____ ,
+    _____ , _Alt_ , __C__ , __C__ , __C__ , _____ , _____ , _____ , _____ , _____ , _____ , _____ ,
+    _____ , _____ , _____ , __Y__ , Space ,     Space     , _____ , _____ , _____ , _____ , ToBas
 ),
 
 };
