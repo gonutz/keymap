@@ -42,7 +42,7 @@
 #define CFX DE_CIRC
 #define LBC DE_LCBR
 #define RBC DE_RCBR
-#define PLS DE_PLUS
+#define PLS LSFT_T(DE_PLUS)
 #define MNS DE_MINS
 #define BNG DE_EXLM
 #define DOL DE_DLR
@@ -134,6 +134,7 @@
 #define PLY KC_MEDIA_PLAY_PAUSE
 #define BTK DE_GRV
 #define QRZ TO(_QWERTZ)
+#define PVT RCS(DE_N)
 
 enum custom_keycodes {
 	GG_ = SAFE_RANGE,
@@ -156,39 +157,34 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [_BASE] = LAYOUT_planck_mit(
     ___ , _Q_ , _W_ , _F_ , _P_ , ___ , ___ , _L_ , _U_ , _Y_ , _V_ , ___ ,
-    S1T , _A_ , _R_ , _S_ , _T_ , _G_ , _M_ , _N_ , _E_ , _I_ , _O_ , G_E ,
+    SYM , _A_ , _R_ , _S_ , _T_ , _G_ , _M_ , _N_ , _E_ , _I_ , _O_ , G_E ,
     ___ , _Z_ , _X_ , _C_ , _D_ , ___ , ___ , _H_ , _K_ , _B_ , _J_ , ___ ,
-    ___ , ___ , ___ , NAV , CBK ,    SYM    , CSP , NUM , ___ , ___ , QRZ
+    ___ , ___ , ___ , NAV , CBK ,    BAS    , CSP , NUM , ___ , ___ , QRZ
 ),
-
 [_SYMBOLS] = LAYOUT_planck_mit(
-    ___ , TLD , AT_ , HSH , EQL , ___ , ___ , LBR , RBR , QTN , SEM , ___ ,
-    BNG , DOL , PCN , AMP , UML , BSL , COL , LPA , RPA , LBC , RBC , ENT ,
+    ___ , TLD , AT_ , HSH , EQL , ___ , ___ , LBR , RBR , QTN , MNS , ___ ,
+    SYM , DOL , PCN , AMP , UML , BSL , BNG , LPA , RPA , LBC , RBC , ENT ,
     ___ , BAR , LES , MOR , UND , ___ , ___ , SQT , DQT , COM , DOT , ___ ,
     ___ , ___ , ___ , NAV , CBK ,    BAS    , CSP , NUM , ___ , ___ , QRZ
 ),
-
 [_NUM] = LAYOUT_planck_mit(
     ___ , F12 , F_7 , F_8 , F_9 , ___ , ___ , _7_ , _8_ , _9_ , MNS , ___ ,
-    S1T , F11 , F_4 , F_5 , GF6 , MUL , SLH , _4_ , _5_ , _6_ , PLS , ENT ,
+    SYM , F11 , F_4 , F_5 , GF6 , MUL , SLH , _4_ , _5_ , _6_ , PLS , ENT ,
     ___ , F10 , F_1 , F_2 , F_3 , ___ , ___ , _1_ , _2_ , _3_ , DOT , ___ ,
     ___ , ___ , ___ , NAV , CBK ,    BAS    , CSP , C_0 , ___ , ___ , QRZ
 ),
-
 [_NAV] = LAYOUT_planck_mit(
-    BOT , REO , WND , DRK , BGT , ___ , ___ , PUP , UP_ , PDN , QIT , ___ ,
-    ESC , CTL , SFT , ALT , TAB , GUI , HOM , LFT , DWN , RGT , END , ENT ,
+    BOT , REO , WND , ESC , PVT , ___ , ___ , PUP , UP_ , PDN , QIT , ___ ,
+    SYM , CTL , SFT , ALT , TAB , GUI , HOM , LFT , DWN , RGT , END , ENT ,
     ___ , DEL , CUT , CPY , PST , ___ , ___ , TBL , TBR , NTB , CTB , ___ ,
     ___ , ___ , ___ , NAV , CBK ,    BAS    , CSP , NUM , ___ , ___ , QRZ
 ),
-
 [_UMLAUTS] = LAYOUT_planck_mit(
-    ___ , CFX , BTK , ALT , PRT , ___ , ___ , ___ , UE_ , ___ , ___ , ___ ,
-    S1T , AE_ , ___ , SS_ , PLY , ___ , ___ , VDN , VUP , MUT , OE_ , ENT ,
-    ___ , ___ , ___ , ___ , ___ , ___ , ___ , ___ , ___ , ___ , ___ , ___ ,
+    ___ , CFX , BTK , ALT , PRT , ___ , ___ , PLY , UE_ , ___ , ___ , ___ ,
+    SYM , AE_ , ___ , SS_ , UML , ___ , ___ , VDN , VUP , MUT , OE_ , ENT ,
+    ___ , ___ , ___ , ___ , ___ , ___ , ___ , DRK , BGT , ___ , ___ , ___ ,
     ___ , ___ , ___ , NAV , CBK ,    BAS    , CSP , NUM , ___ , ___ , QRZ
 ),
-
 [_QWERTZ] = LAYOUT_planck_mit(
     ___ , GG_ , _Q_ , _W_ , _E_ , ___ , ___ , ___ , ___ , ___ , ___ , ___ ,
     ESC , SFT , _A_ , _S_ , _D_ , ENT , ___ , ___ , ___ , ___ , ___ , ___ ,
