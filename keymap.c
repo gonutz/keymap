@@ -131,11 +131,15 @@
 #define ToBas TO(_BASE)
 #define ToUml TO(_UMLAUTS)
 #define ToQrz TO(_QWERTZ)
+#define R_G_B RGB_TOG
 
 enum layers { _BASE, _SYMBOLS, _NAV, _NUM, _UMLAUTS, _QWERTZ };
 
 enum custom_keycodes {
 	SayGG = SAFE_RANGE,
+	Smile,
+	Grin_,
+	Wink_,
 	ToSym,
 	ToNav,
 	ToNum,
@@ -232,6 +236,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 		SEND_STRING("\ngg\n");
 	}
 
+	if(keycode == Smile && record->event.pressed) {
+		SEND_STRING(">/("); // German :-)
+	}
+
+	if(keycode == Grin_ && record->event.pressed) {
+		SEND_STRING(">/D"); // German :-D
+	}
+
+	if(keycode == Wink_ && record->event.pressed) {
+		SEND_STRING("</("); // German ;-)
+	}
+
     return true;
 };
 
@@ -244,43 +260,79 @@ uint32_t layer_state_set_user(uint32_t state) {
 	return state;
 }
 
+void rgb_matrix_indicators_user(void) {
+	rgb_matrix_set_color_all(0, 0, 0);
+	if(IS_LAYER_ON(_QWERTZ)) {
+		rgb_matrix_set_color(0, 128, 0, 0);
+		rgb_matrix_set_color(5, 128, 0, 0);
+		rgb_matrix_set_color(24, 128, 0, 0);
+		rgb_matrix_set_color(29, 128, 0, 0);
+		rgb_matrix_set_color(36, 128, 0, 0);
+		rgb_matrix_set_color(37, 128, 0, 0);
+		rgb_matrix_set_color(38, 128, 0, 0);
+	} else if(IS_LAYER_ON(_UMLAUTS)) {
+		rgb_matrix_set_color(29, 0, 128, 0);
+		rgb_matrix_set_color(30, 0, 128, 0);
+		rgb_matrix_set_color(36, 0, 128, 0);
+		rgb_matrix_set_color(37, 0, 128, 0);
+		rgb_matrix_set_color(38, 0, 128, 0);
+		rgb_matrix_set_color(44, 0, 128, 0);
+		rgb_matrix_set_color(45, 0, 128, 0);
+		rgb_matrix_set_color(46, 0, 128, 0);
+	} else if(IS_LAYER_ON(_NUM)) {
+		rgb_matrix_set_color(30, 128, 128, 0);
+		rgb_matrix_set_color(44, 128, 128, 0);
+		rgb_matrix_set_color(45, 128, 128, 0);
+		rgb_matrix_set_color(46, 128, 128, 0);
+	} else if(IS_LAYER_ON(_NAV)) {
+		rgb_matrix_set_color(29, 128, 0, 128);
+		rgb_matrix_set_color(36, 128, 0, 128);
+		rgb_matrix_set_color(37, 128, 0, 128);
+		rgb_matrix_set_color(38, 128, 0, 128);
+	} else if(IS_LAYER_ON(_SYMBOLS)) {
+		rgb_matrix_set_color(0, 0, 128, 128);
+		rgb_matrix_set_color(5, 0, 128, 128);
+		rgb_matrix_set_color(24, 0, 128, 128);
+	}
+}
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [_BASE] = LAYOUT_planck_mit(
     Boot_ , __Q__ , __W__ , __F__ , __P__ , _____ , _____ , __L__ , __U__ , __Y__ , __J__ , ToBas ,
     ToSym , __A__ , __R__ , __S__ , __T__ , __G__ , __M__ , __N__ , __E__ , __I__ , __O__ , Gui_E ,
     _____ , __Z__ , __X__ , __C__ , __D__ , _____ , _____ , __H__ , __K__ , __B__ , __V__ , _____ ,
-    _____ , _____ , _____ , ToNav , C_Bck ,     Shift     , Space , ToNum , _____ , _____ , ToQrz
+    R_G_B , _____ , _____ , ToNav , C_Bck ,     Shift     , Space , ToNum , _____ , _____ , ToQrz
 ),
 [_SYMBOLS] = LAYOUT_planck_mit(
     Boot_ , Tilde , _At__ , Hash_ , Equal , _____ , _____ , Quote , DblQu , Qstin , Minus , ToBas ,
     ToSym , Dolar , Perct , Ampsn , BkTik , Bkslh , Bang_ , LParn , RParn , Comma , _Dot_ , Enter ,
     _____ , _Bar_ , Less_ , More_ , Under , _____ , _____ , LBrck , RBrck , LBrce , RBrce , _____ ,
-    _____ , _____ , _____ , ToNav , C_Bck ,     ToBas     , Space , ToNum , _____ , _____ , ToQrz
+    R_G_B , _____ , _____ , ToNav , C_Bck ,     ToBas     , Space , ToNum , _____ , _____ , ToQrz
 ),
 [_NAV] = LAYOUT_planck_mit(
     Boot_ , ReOpn , Wndws , _Esc_ , Prvat , _____ , _____ , PagUp , _Up__ , PgDwn , Quit_ , ToBas ,
     ToSym , Ctrl_ , Shift , _Alt_ , _Tab_ , _Gui_ , Home_ , Left_ , Down_ , Right , _End_ , Enter ,
     _____ , _Del_ , _Cut_ , Copy_ , Paste , _____ , _____ , L_Tab , R_Tab , NwTab , ClTab , _____ ,
-    _____ , _____ , _____ , ToNav , C_Bck ,     ToBas     , Space , ToNum , _____ , _____ , ToQrz
+    R_G_B , _____ , _____ , ToNav , C_Bck ,     ToBas     , Space , ToNum , _____ , _____ , ToQrz
 ),
 [_NUM] = LAYOUT_planck_mit(
     Boot_ , _F12_ , _F_7_ , _F_8_ , _F_9_ , _____ , _____ , __7__ , __8__ , __9__ , Ctl_0 , ToBas ,
     ToSym , _F11_ , _F_4_ , _F_5_ , GuiF6 , Mult_ , Slash , __4__ , __5__ , __6__ , Plus_ , Enter ,
     _____ , _F10_ , _F_1_ , _F_2_ , _F_3_ , _____ , _____ , __1__ , __2__ , __3__ , _Dot_ , _____ ,
-    _____ , _____ , _____ , ToNav , C_Bck ,     ToBas     , Space , ToNum , _____ , _____ , ToQrz
+    R_G_B , _____ , _____ , ToNav , C_Bck ,     ToBas     , Space , ToNum , _____ , _____ , ToQrz
 ),
 [_UMLAUTS] = LAYOUT_planck_mit(
     Boot_ , Cmflx , _____ , _Alt_ , Print , _____ , _____ , Play_ , _Ue__ , _____ , _____ , ToBas ,
     ToSym , _Ae__ , _____ , _Ss__ , CS_F9 , _____ , _____ , VolDn , VolUp , Mute_ , _Oe__ , Enter ,
-    _____ , _____ , _____ , _____ , _____ , _____ , _____ , Darkr , Brght , _____ , _____ , _____ ,
-    _____ , _____ , _____ , ToNav , C_Bck ,     ToBas     , Space , ToNum , _____ , _____ , ToQrz
+    _____ , Smile , Wink_ , Grin_ , _____ , _____ , _____ , Darkr , Brght , _____ , _____ , _____ ,
+    R_G_B , _____ , _____ , ToNav , C_Bck ,     ToBas     , Space , ToNum , _____ , _____ , ToQrz
 ),
 [_QWERTZ] = LAYOUT_planck_mit(
     Boot_ , SayGG , __Q__ , __W__ , __E__ , _____ , _____ , AltTb , _____ , _____ , _____ , ToBas ,
     _Esc_ , Shift , __A__ , __S__ , __D__ , Enter , _____ , _____ , _____ , _____ , _____ , _____ ,
     _____ , _Alt_ , __C__ , __C__ , __C__ , _____ , _____ , _____ , _____ , _____ , _____ , _____ ,
-    _____ , _____ , _____ , __Y__ , Space ,     Space     , _____ , _____ , _____ , _____ , ToQrz
+    R_G_B , _____ , _____ , __Y__ , Space ,     Space     , _____ , _____ , _____ , _____ , ToQrz
 ),
 
 };
