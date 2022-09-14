@@ -127,6 +127,7 @@
 #define Play_ KC_MEDIA_PLAY_PAUSE
 #define BkTik DE_GRV
 #define Prvat RCS(DE_N)
+#define CS_F9 RCS(KC_F9)
 #define ToBas TO(_BASE)
 #define ToUml TO(_UMLAUTS)
 #define ToQrz TO(_QWERTZ)
@@ -270,8 +271,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _____ , _____ , _____ , ToNav , C_Bck ,     ToBas     , Space , ToNum , _____ , _____ , ToQrz
 ),
 [_UMLAUTS] = LAYOUT_planck_mit(
-    Boot_ , Cmflx , BkTik , _Alt_ , Print , _____ , _____ , Play_ , _Ue__ , _____ , _____ , ToBas ,
-    ToSym , _Ae__ , _____ , _Ss__ , _____ , _____ , _____ , VolDn , VolUp , Mute_ , _Oe__ , Enter ,
+    Boot_ , Cmflx , _____ , _Alt_ , Print , _____ , _____ , Play_ , _Ue__ , _____ , _____ , ToBas ,
+    ToSym , _Ae__ , _____ , _Ss__ , CS_F9 , _____ , _____ , VolDn , VolUp , Mute_ , _Oe__ , Enter ,
     _____ , _____ , _____ , _____ , _____ , _____ , _____ , Darkr , Brght , _____ , _____ , _____ ,
     _____ , _____ , _____ , ToNav , C_Bck ,     ToBas     , Space , ToNum , _____ , _____ , ToQrz
 ),
