@@ -1,5 +1,6 @@
 #include QMK_KEYBOARD_H
 #include "keymap_german.h"
+#include "sendstring_german.h"
 
 #define _____ XXXXXXX
 #define __A__ DE_A
@@ -237,15 +238,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 	}
 
 	if(keycode == Smile && record->event.pressed) {
-		SEND_STRING(">/("); // German :-)
+		SEND_STRING(":-)");
 	}
 
 	if(keycode == Grin_ && record->event.pressed) {
-		SEND_STRING(">/D"); // German :-D
+		SEND_STRING(":-D");
 	}
 
 	if(keycode == Wink_ && record->event.pressed) {
-		SEND_STRING("</("); // German ;-)
+		SEND_STRING(";-)");
 	}
 
     return true;
