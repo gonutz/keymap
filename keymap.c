@@ -66,14 +66,14 @@
 #define _F_1_ KC_F1
 #define _F_2_ KC_F2
 #define _F_3_ KC_F3
-#define _F_4_ KC_F4
-#define _F_5_ KC_F5
-#define GuiF6 LGUI_T(KC_F6)
+#define _F_4_ LSFT_T(KC_F4)
+#define _F_5_ LALT_T(KC_F5)
+#define _F_6_ LGUI_T(KC_F6)
 #define _F_7_ KC_F7
 #define _F_8_ KC_F8
 #define _F_9_ KC_F9
 #define _F10_ KC_F10
-#define _F11_ KC_F11
+#define _F11_ LCTL_T(KC_F11)
 #define _F12_ KC_F12
 #define Ctrl_ KC_LCTL
 #define __1__ DE_1
@@ -165,53 +165,67 @@ int layer_for_key(uint16_t keycode) {
 	return _SYMBOLS;
 }
 
-const int OtherEvent = 0;
-const int NavDown    = 1;
-const int NavUp      = 2;
-const int NumDown    = 3;
-const int NumUp      = 4;
+struct key_event {
+	uint16_t keycode;
+	bool down;
+};
 
-int make_event(uint16_t keycode, keyrecord_t *record) {
-	if(keycode == ToNav && record->event.pressed)
-		return NavDown;
-	if(keycode == ToNav && !record->event.pressed)
-		return NavUp;
-	if(keycode == ToNum && record->event.pressed)
-		return NumDown;
-	if(keycode == ToNum && !record->event.pressed)
-		return NumUp;
-	return OtherEvent;
+struct key_event make_event(uint16_t keycode, keyrecord_t *record) {
+	struct key_event e;
+	e.keycode = keycode;
+	e.down = record->event.pressed;
+	return e;
 }
 
-bool nav_and_num_were_tapped_together(int events[4]) {
-	bool first_both_down =
-		(events[0] == NavDown && events[1] == NumDown) ||
-		(events[1] == NavDown && events[0] == NumDown);
-
-	bool then_both_up =
-		(events[2] == NavUp && events[3] == NumUp) ||
-		(events[3] == NavUp && events[2] == NumUp);
-
-	return first_both_down && then_both_up;
+bool tapped_together(struct key_event e[4], uint16_t key1, uint16_t key2) {
+	bool down_then_up = e[0].down && e[1].down && !e[2].down && !e[3].down;
+	bool key1_down = e[0].keycode == key1 || e[1].keycode == key1;
+	bool key2_down = e[0].keycode == key2 || e[1].keycode == key2;
+	bool key1_up   = e[2].keycode == key1 || e[3].keycode == key1;
+	bool key2_up   = e[2].keycode == key2 || e[3].keycode == key2;
+	return down_then_up && key1_down && key2_down && key1_up && key2_up;
 }
+
+bool alt_mod_down = false;
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+	int layer = current_layer();
+
 	static int last_layer = 0;
 	static bool stay_in_layer = false;
 	static bool non_layer_switch_key_pressed = false;
-	static int last_four_events[4];
+	static struct key_event last_four_events[4] = {};
+	static int layer_history[5] = {};
 
 	last_four_events[0] = last_four_events[1];
 	last_four_events[1] = last_four_events[2];
 	last_four_events[2] = last_four_events[3];
 	last_four_events[3] = make_event(keycode, record);
 
-	if(nav_and_num_were_tapped_together(last_four_events)) {
+	layer_history[0] = layer_history[1];
+	layer_history[1] = layer_history[2];
+	layer_history[2] = layer_history[3];
+	layer_history[3] = layer_history[4];
+	layer_history[4] = layer;
+
+	if(tapped_together(last_four_events, ToNav, ToNum)) {
 		layer_move(_UMLAUTS);
 		stay_in_layer = true;
 	}
 
-	int layer = current_layer();
+	if(tapped_together(last_four_events, ToSym, ToNav)) {
+		layer_move(layer_history[0]);
+		layer_history[1] = layer_history[0];
+		layer_history[2] = layer_history[0];
+		layer_history[3] = layer_history[0];
+		layer_history[4] = layer_history[0];
+		stay_in_layer = true;
+		alt_mod_down = !alt_mod_down;
+		if(alt_mod_down)
+			add_mods(MOD_MASK_ALT);
+		else
+			del_mods(MOD_MASK_ALT);
+	}
 
 	if(is_layer_switch_key(keycode)) {
 		if(record->event.pressed) {
@@ -262,38 +276,44 @@ uint32_t layer_state_set_user(uint32_t state) {
 }
 
 void rgb_matrix_indicators_user(void) {
+	const uint8_t x = 50; // Brightness.
 	rgb_matrix_set_color_all(0, 0, 0);
 	if(IS_LAYER_ON(_QWERTZ)) {
-		rgb_matrix_set_color(0, 128, 0, 0);
-		rgb_matrix_set_color(5, 128, 0, 0);
-		rgb_matrix_set_color(24, 128, 0, 0);
-		rgb_matrix_set_color(29, 128, 0, 0);
-		rgb_matrix_set_color(36, 128, 0, 0);
-		rgb_matrix_set_color(37, 128, 0, 0);
-		rgb_matrix_set_color(38, 128, 0, 0);
+		rgb_matrix_set_color( 0, x, 0, 0);
+		rgb_matrix_set_color( 5, x, 0, 0);
+		rgb_matrix_set_color(24, x, 0, 0);
+		rgb_matrix_set_color(29, x, 0, 0);
+		rgb_matrix_set_color(36, x, 0, 0);
+		rgb_matrix_set_color(37, x, 0, 0);
+		rgb_matrix_set_color(38, x, 0, 0);
 	} else if(IS_LAYER_ON(_UMLAUTS)) {
-		rgb_matrix_set_color(29, 0, 128, 0);
-		rgb_matrix_set_color(30, 0, 128, 0);
-		rgb_matrix_set_color(36, 0, 128, 0);
-		rgb_matrix_set_color(37, 0, 128, 0);
-		rgb_matrix_set_color(38, 0, 128, 0);
-		rgb_matrix_set_color(44, 0, 128, 0);
-		rgb_matrix_set_color(45, 0, 128, 0);
-		rgb_matrix_set_color(46, 0, 128, 0);
+		rgb_matrix_set_color(29, 0, x, 0);
+		rgb_matrix_set_color(30, 0, x, 0);
+		rgb_matrix_set_color(36, 0, x, 0);
+		rgb_matrix_set_color(37, 0, x, 0);
+		rgb_matrix_set_color(38, 0, x, 0);
+		rgb_matrix_set_color(44, 0, x, 0);
+		rgb_matrix_set_color(45, 0, x, 0);
+		rgb_matrix_set_color(46, 0, x, 0);
 	} else if(IS_LAYER_ON(_NUM)) {
-		rgb_matrix_set_color(30, 128, 128, 0);
-		rgb_matrix_set_color(44, 128, 128, 0);
-		rgb_matrix_set_color(45, 128, 128, 0);
-		rgb_matrix_set_color(46, 128, 128, 0);
+		rgb_matrix_set_color(30, x, x, 0);
+		rgb_matrix_set_color(44, x, x, 0);
+		rgb_matrix_set_color(45, x, x, 0);
+		rgb_matrix_set_color(46, x, x, 0);
 	} else if(IS_LAYER_ON(_NAV)) {
-		rgb_matrix_set_color(29, 128, 0, 128);
-		rgb_matrix_set_color(36, 128, 0, 128);
-		rgb_matrix_set_color(37, 128, 0, 128);
-		rgb_matrix_set_color(38, 128, 0, 128);
+		rgb_matrix_set_color(29, x, 0, x);
+		rgb_matrix_set_color(36, x, 0, x);
+		rgb_matrix_set_color(37, x, 0, x);
+		rgb_matrix_set_color(38, x, 0, x);
 	} else if(IS_LAYER_ON(_SYMBOLS)) {
-		rgb_matrix_set_color(0, 0, 128, 128);
-		rgb_matrix_set_color(5, 0, 128, 128);
-		rgb_matrix_set_color(24, 0, 128, 128);
+		rgb_matrix_set_color( 0, 0, x, x);
+		rgb_matrix_set_color( 5, 0, x, x);
+		rgb_matrix_set_color(24, 0, x, x);
+	}
+
+	if(alt_mod_down) {
+		rgb_matrix_set_color( 6, x, x, x);
+		rgb_matrix_set_color(11, x, x, x);
 	}
 }
 
@@ -319,7 +339,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 [_NUM] = LAYOUT_planck_mit(
     Boot_ , _F12_ , _F_7_ , _F_8_ , _F_9_ , _____ , _____ , __7__ , __8__ , __9__ , Ctl_0 , ToBas ,
-    ToSym , _F11_ , _F_4_ , _F_5_ , GuiF6 , Mult_ , Slash , __4__ , __5__ , __6__ , Plus_ , Enter ,
+    ToSym , _F11_ , _F_4_ , _F_5_ , _F_6_ , Mult_ , Slash , __4__ , __5__ , __6__ , Plus_ , Enter ,
     _____ , _F10_ , _F_1_ , _F_2_ , _F_3_ , _____ , _____ , __1__ , __2__ , __3__ , _Dot_ , _____ ,
     R_G_B , _____ , _____ , ToNav , C_Bck ,     ToBas     , Space , ToNum , _____ , _____ , ToQrz
 ),
