@@ -350,8 +350,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     R_G_B , _____ , _____ , ToNav , C_Bck ,     ToBas     , Space , ToNum , _____ , _____ , ToQrz
 ),
 [_QWERTZ] = LAYOUT_planck_mit(
-    Boot_ , SayGG , __Q__ , __W__ , __E__ , _____ , _____ , AltTb , _____ , _____ , _____ , ToBas ,
-    _Esc_ , Shift , __A__ , __S__ , __D__ , Enter , _____ , _____ , _____ , _____ , _____ , _____ ,
+    Boot_ , SayGG , __Q__ , __W__ , __E__ , _____ , _____ , AltTb , _Up__ , _____ , _____ , ToBas ,
+    _Esc_ , Shift , __A__ , __S__ , __D__ , Enter , _____ , Left_ , Down_ , Right , _____ , _____ ,
     _____ , _Alt_ , __C__ , __C__ , __C__ , _____ , _____ , _____ , _____ , _____ , _____ , _____ ,
     R_G_B , _____ , _____ , __Y__ , Space ,     Space     , _____ , _____ , _____ , _____ , ToQrz
 ),
