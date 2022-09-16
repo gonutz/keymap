@@ -222,9 +222,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 		stay_in_layer = true;
 		alt_mod_down = !alt_mod_down;
 		if(alt_mod_down)
-			add_mods(MOD_MASK_ALT);
+			add_mods(MOD_BIT(KC_LALT));
 		else
-			del_mods(MOD_MASK_ALT);
+			del_mods(MOD_BIT(KC_LALT));
 	}
 
 	if(is_layer_switch_key(keycode)) {
