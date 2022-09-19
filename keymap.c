@@ -127,7 +127,6 @@
 #define Mute_ KC_AUDIO_MUTE
 #define Play_ KC_MEDIA_PLAY_PAUSE
 #define BkTik DE_GRV
-#define Prvat RCS(DE_N)
 #define CS_F9 RCS(KC_F9)
 #define R_G_B RGB_TOG
 
@@ -143,25 +142,6 @@ enum custom_keycodes {
 	ToNav,
 	ToNum,
 };
-
-int current_layer(void) {
-	for(int i = _GAMING; i >= _BASE; i--)
-		if(IS_LAYER_ON(i))
-			return i;
-	return _BASE;
-}
-
-bool is_layer_switch_key(uint16_t keycode) {
-	return keycode == ToSym || keycode == ToNav || keycode == ToNum;
-}
-
-int layer_for_key(uint16_t keycode) {
-	if(keycode == ToNav)
-		return _NAV;
-	if(keycode == ToNum)
-		return _NUM;
-	return _SYMBOLS;
-}
 
 struct key_event {
 	uint16_t keycode;
@@ -216,6 +196,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 			layer_move(_BASE);
 			return false;
 		}
+
+		if(keycode == SayGG && record->event.pressed) {
+			SEND_STRING("\ngg\n");
+		}
+
 		return true;
 	}
 
@@ -330,10 +315,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 	// The following are some macro keys.
 
-	if(keycode == SayGG && record->event.pressed) {
-		SEND_STRING("\ngg\n");
-	}
-
 	if(keycode == Smile && record->event.pressed) {
 		SEND_STRING(":-)");
 	}
@@ -418,13 +399,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     R_G_B , _____ , _____ , ToNav , C_Bck ,     ToBas     , Space , ToNum , _____ , _____ , _____
 ),
 [_NAV] = LAYOUT_planck_mit(
-    Boot_ , ReOpn , Wndws , _Esc_ , Prvat , _____ , _____ , PagUp , _Up__ , PgDwn , Quit_ , _____ ,
+    Boot_ , ReOpn , Wndws , _Esc_ , AltTb , _____ , _____ , PagUp , _Up__ , PgDwn , Quit_ , _____ ,
     ToSym , Ctrl_ , Shift , _Alt_ , _Tab_ , _Gui_ , Home_ , Left_ , Down_ , Right , _End_ , Enter ,
     _____ , _Del_ , _Cut_ , Copy_ , Paste , _____ , _____ , L_Tab , R_Tab , NwTab , ClTab , _____ ,
     R_G_B , _____ , _____ , ToNav , C_Bck ,     ToBas     , Space , ToNum , _____ , _____ , _____
 ),
 [_NUM] = LAYOUT_planck_mit(
-    Boot_ , _F12_ , _F_7_ , _F_8_ , _F_9_ , _____ , _____ , __7__ , __8__ , __9__ , Ctl_0 , _____ ,
+    Boot_ , _F12_ , _F_7_ , _F_8_ , _F_9_ , _____ , _____ , __7__ , __8__ , __9__ , __0__ , _____ ,
     ToSym , _F11_ , _F_4_ , _F_5_ , _F_6_ , Mult_ , Slash , __4__ , __5__ , __6__ , Plus_ , Enter ,
     _____ , _F10_ , _F_1_ , _F_2_ , _F_3_ , _____ , _____ , __1__ , __2__ , __3__ , _Dot_ , _____ ,
     R_G_B , _____ , _____ , ToNav , C_Bck ,     ToBas     , Space , ToNum , _____ , _____ , _____
