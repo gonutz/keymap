@@ -128,6 +128,7 @@
 #define Play_ KC_MEDIA_PLAY_PAUSE
 #define BkTik DE_GRV
 #define CS_F9 RCS(KC_F9)
+#define CS_F4 RCS(KC_F4)
 #define R_G_B RGB_TOG
 
 enum layers { _BASE, _SYMBOLS, _NAV, _NUM, _UMLAUTS, _GAMING };
@@ -412,7 +413,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 [_UMLAUTS] = LAYOUT_planck_mit(
     Boot_ , Cmflx , _____ , _Alt_ , Print , _____ , _____ , Play_ , _Ue__ , _____ , _____ , _____ ,
-    ToSym , _Ae__ , _____ , _Ss__ , CS_F9 , _____ , _____ , VolDn , VolUp , Mute_ , _Oe__ , Enter ,
+    ToSym , _Ae__ , CS_F4 , _Ss__ , CS_F9 , _____ , _____ , VolDn , VolUp , Mute_ , _Oe__ , Enter ,
     _____ , Smile , Wink_ , Grin_ , _____ , _____ , _____ , Darkr , Brght , _____ , _____ , _____ ,
     R_G_B , _____ , _____ , ToNav , C_Bck ,     ToBas     , Space , ToNum , _____ , _____ , _____
 ),
